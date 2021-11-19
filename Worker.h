@@ -4,7 +4,7 @@
 
 #ifndef HOMEWORK27_4_3_WORKER_H
 #define HOMEWORK27_4_3_WORKER_H
-
+#include <string>
 
 class Worker {
     class Manager* manager = nullptr;
@@ -13,6 +13,7 @@ public:
     Worker(class Manager* inManager) : manager(inManager) {currentTask = "nothing";}
     void SetTask(std::string task){ currentTask = std::move(task);}
     std::string GetTask(){return currentTask;}
+
 };
 
 

@@ -5,23 +5,27 @@
 #ifndef HOMEWORK27_4_3_MANAGER_H
 #define HOMEWORK27_4_3_MANAGER_H
 #include "Worker.h"
+#include <ctime>
 
 class Manager {
-    int countWorkers;
+private:
+    int countWorkers = 1;
     Worker** workers = nullptr;
-    static int managerNumber;
-public:
-    Manager(int inCountWorkers) : countWorkers(inCountWorkers){
-        ++managerNumber;
-        if(countWorkers > 0){
-            workers = new Worker*[countWorkers];
-            for (int i =0; i < countWorkers; ++i){
-                workers[i] = new Worker(this);
-            }
-        }
-    }
-    ~Worker(){delete workers; managerNumber = 0;}
-};
 
+    int managerNumber;
+public:
+    static int gen;
+    Manager();
+    void SetCountWorkers(int inCountWorkers);
+    ~Manager();
+    int GetCountWorkers();
+    Worker* GetWorkerPtr(int index);
+    int GetTaskCount(int task);
+    int GetFreeWorkers();
+    std::string GetRandomTask();
+    int SetTaskToWorkers(int task);
+    int GetManagerNumber();
+
+};
 
 #endif //HOMEWORK27_4_3_MANAGER_H
