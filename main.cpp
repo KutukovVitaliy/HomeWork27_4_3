@@ -2,7 +2,9 @@
 #include "Manager.h"
 
 int main() {
-    int commandQuantity, worksQuantity;
+    bool theEnd = false;
+    int command;
+    int commandQuantity, worksQuantity, commandBusy = 0;
     std::cout << "Enter the command quantity: " ;
     std::cin >> commandQuantity;
     Manager* manager = new Manager[commandQuantity];
@@ -11,12 +13,22 @@ int main() {
         std::cin >> worksQuantity;
         manager[i].SetCountWorkers(worksQuantity);
     }
-    for(int i = 0;i < commandQuantity; ++i ){
+    do{
+        std::cout << "Enter command: ";
+        std::cin >> command;
+        for(int i = 0;i < commandQuantity; ++i ){
+            if(!manager[i].SetTaskToWorkers(command)) commandBusy++;
+            std::cout << "Manager #" << manager[i].GetManagerNumber() << " has " << manager[i].GetFreeWorkers() << " free workers" << std::endl;
+        }
+        if(commandBusy == commandQuantity) theEnd = true;
+
+    } while (!theEnd);
+    /*for(int i = 0;i < commandQuantity; ++i ){
         std::cout << "Manager #" << i+1 << ": " << std::endl;
         std::cout << "manager number is " << manager[i].GetManagerNumber() << std::endl;
         for(int j =0; j < manager[i].GetCountWorkers(); ++j){
             std::cout << "workers #" << j+1 << ": " << manager[i].GetWorkerPtr(j)->GetTask() << std::endl;
         }
-    }
+    }*/
     return 0;
 }

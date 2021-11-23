@@ -55,13 +55,15 @@ std::string Manager::GetRandomTask(){
 }
 int Manager::SetTaskToWorkers(int task){
     int count = 0;
-    if(task > 0 && GetFreeWorkers() > 0){
+     std::srand(task + GetManagerNumber());
+     int realTask = std::rand() % GetCountWorkers() + 1;
+    if(realTask > 0 && GetFreeWorkers() > 0){
         for(int i = 0; i < countWorkers; ++i){
             if(workers[i]->GetTask() == "nothing"){
                 workers[i]->SetTask(GetRandomTask());
                 count++;
-                task--;
-                if(task == 0) break;
+                realTask--;
+                if(realTask == 0) break;
             }
         }
     }
