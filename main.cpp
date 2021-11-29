@@ -20,7 +20,7 @@ int main() {
             if(!manager[i].SetTaskToWorkers(command)) commandBusy++;
             std::cout << "Manager #" << manager[i].GetManagerNumber() << " has " << manager[i].GetFreeWorkers() << " free workers" << std::endl;
         }
-        if(commandBusy == commandQuantity) theEnd = true;
+        if(commandBusy == (commandQuantity - 1)) theEnd = true;
 
     } while (!theEnd);
     /*for(int i = 0;i < commandQuantity; ++i ){
